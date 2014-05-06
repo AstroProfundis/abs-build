@@ -12,19 +12,19 @@ depends=('apache22' 'python')
 conflicts=('mod_python2-legacy' 'mod_python2')
 provides=('mod_python')
 install="$pkgname.install"
-source=("http://dist.modpython.org/dist/$pkgname-$pkgver.tgz")
+source=("http://dist.modpython.org/dist/mod_python-$pkgver.tgz")
 options=('!strip')
 md5sums=('2e61621e8d030f535f112d8e739161e2')
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/mod_python-$pkgver"
   ./configure --prefix=/usr --with-python=/usr/bin/python
   sed -i -e "s#-Wl[^ ]*#$LDFLAGS#g" src/Makefile
   make
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/mod_python-$pkgver"
   install -d "$pkgdir"/usr/bin
   make DESTDIR="$pkgdir" install
 }
