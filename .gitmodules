@@ -1,0 +1,3 @@
+[submodule "linux-linode"]
+	path = linux-linode
+	url = git@github.com:AstroProfundis/linux-linode.git
