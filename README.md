@@ -1,4 +1,20 @@
 abs-build
 =========
 
-My custom build packages for ArchLinux
+My custom build packages for ArchLinux, including all [my AUR](https://github.com/AstroProfundis/aur) [packages](https://aur.archlinux.org/packages/?SeB=m&K=AstroProfundis) and some custom modified ones from other's AUR.
+
+Binary repository can be used:
+
+`/etc/pacman.conf`:
+
+    [aspro]
+    SigLevel = TrustAll
+    Server = http://fun.atr.me/archlinux/$arch
+
+And you may need to sign my packaging key, otherwise you'll have to set `SigLevel = Never`:
+
+    sudo pacman-key --lsign-key BB01E61B
+
+This key is available on any public keyservers and also available [here](http://fun.atr.me/archlinux/BB01E61B.asc).
+
+Read more about `pacman-key` on [wiki](https://wiki.archlinux.org/index.php/Pacman-key).
