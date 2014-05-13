@@ -15,6 +15,6 @@ And you may need to sign my packaging key, otherwise you'll have to set `SigLeve
 
     sudo pacman-key --lsign-key C75827D8
 
-This key is available on any public keyservers and also available [here](http://fun.atr.me/archlinux/BB01E61B.asc).
+This key is available on any public keyservers and also available [here](http://fun.atr.me/archlinux/pubring.gpg).
 
 Read more about `pacman-key` on [wiki](https://wiki.archlinux.org/index.php/Pacman-key).
