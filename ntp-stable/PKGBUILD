@@ -1,0 +1,59 @@
+# $Id$
+# Maintainer: Gaetan Bisson <bisson@archlinux.org>
+# Contributor: kevin <kevin@archlinux.org>
+# Contributor: Allen Zhong <moeallenz@gmail.com>
+
+pkgname=ntp-stable
+_pkgname=ntp
+pkgver=4.2.6.p5
+_realver=4.2.6p5
+pkgrel=20
+pkgdesc='Network Time Protocol reference implementation'
+url='http://www.ntp.org/'
+license=('custom')
+arch=('i686' 'x86_64')
+provides=("$_pkgname=$pkgver")
+conflicts=("$_pkgname")
+depends=('openssl' 'libcap' 'libedit')
+options=('!emptydirs')
+backup=('etc/ntp.conf')
+source=("http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-${_realver}.tar.gz"
+        'ntp.conf'
+        'ntpd.service'
+        'ntpdate.service')
+sha1sums=('4a5353a4791b6f4315a66c28d504ec6c7926b192'
+          'd3496dbeb7d531dd6ab071dbce3262c3c9618d8b'
+          'dd24216e8333e12d5080965696602591c72537b1'
+          '059b382d1af0c55202e2d17f2ae065a2cbfec9ee'
+)
+
+install=install
+
+build() {
+	cd "${srcdir}/${_pkgname}-${_realver}"
+
+	./configure \
+		--prefix=/usr \
+		--libexecdir=/usr/lib \
+		--enable-linuxcaps \
+		--enable-ntp-signd \
+
+	make
+}
+
+package() {
+	cd "${srcdir}/${_pkgname}-${_realver}"
+
+	make DESTDIR="${pkgdir}" install
+
+	install -Dm644 ../ntp.conf "${pkgdir}"/etc/ntp.conf
+	install -Dm644 ../ntpd.service "${pkgdir}"/usr/lib/systemd/system/ntpd.service
+	install -Dm644 ../ntpdate.service "${pkgdir}"/usr/lib/systemd/system/ntpdate.service
+	install -Dm644 COPYRIGHT "${pkgdir}/usr/share/licenses/${_pkgname}/LICENSE"
+
+	install -d -o 87 "${pkgdir}"/var/lib/ntp
+	echo > "${pkgdir}/var/lib/ntp/.placeholder"
+
+	install -dm755 "${pkgdir}/usr/lib/systemd/ntp-units.d"
+	echo 'ntpd.service' > "${pkgdir}/usr/lib/systemd/ntp-units.d/${_pkgname}.list"
+}
