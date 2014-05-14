@@ -8,10 +8,10 @@ Binary repository can be used:
 `/etc/pacman.conf`:
 
     [aspro]
-    SigLevel = TrustAll
+    SigLevel = Optional TrustAll
     Server = http://fun.atr.me/archlinux/$arch
 
-And you may need to sign my packaging key, otherwise you'll have to set `SigLevel = Never`:
+And you may need to sign my packaging key, otherwise you'll probably have issues installing packages:
 
     sudo pacman-key --lsign-key C75827D8
 
