@@ -13,6 +13,7 @@ Binary repository can be used:
 
 And you may need to sign my packaging key, otherwise you'll probably have issues installing packages:
 
+    sudo pacman-key -r C75827D8 # get the key
     sudo pacman-key --lsign-key C75827D8
 
 This key is available on any public keyservers and also available [here](http://fun.atr.me/archlinux/pubring.gpg).
